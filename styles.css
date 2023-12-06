@@ -1,0 +1,36 @@
+body {
+    background-image: url(./imgs/22628444_6654537.jpg);
+    background-size: 100vw 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+#OpacityDiv {
+    background-color: rgb(0, 0, 0, 0.2);
+    width: 80vw;
+    height: 80vh;
+    border-radius: 2rem;
+
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#card-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.card {
+    background-image: url(./imgs/Download\ Dinosaurs\ silhouettes\ layers\ background\ \ banner\ \ illustration_\ \ for\ free.jpeg);
+    background-size: 100px 100px;
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+    margin: 5px;
+}
