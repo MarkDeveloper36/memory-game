@@ -1,17 +1,14 @@
-let totalCards = 11;
+let totalCards = 20;
 
-const cardContainer = document.querySelector('#card-container');
+const cardGrid = document.querySelector('#card-grid');
 
-if (totalCards < 16) {cardContainer.style.width = '330px'}
-else if (totalCards < 25) {cardContainer.style.width = '440px'}
-else {
-    cardContainer.style.width = '770px';
-    cardContainer.style.height = '440px';
-};
+let cols = Math.ceil(Math.sqrt(totalCards));
+let rows = Math.ceil(totalCards / cols);
+console.log('rows = ' + rows);
+console.log('cols = ' + cols);
 
-
-
-
+cardGrid.style.gridTemplateColumns = `repeat(${cols}, 100px)`;
+cardGrid.style.gridTemplateRows = `repeat(${rows}, 100px)`;
 
 
 gameLoop()
@@ -24,6 +21,6 @@ function addCards() {
     for (let i = 0; i < totalCards; i++) {
         let card = document.createElement('div');
         card.classList.add('card');
-        cardContainer.appendChild(card);
+        cardGrid.appendChild(card);
     }
 }
