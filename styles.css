@@ -24,11 +24,25 @@ body {
     gap: 30px;
 }
 
-.card {
-    background-image: url(./imgs/Download\ Dinosaurs\ silhouettes\ layers\ background\ \ banner\ \ illustration_\ \ for\ free.jpeg);
+.card-container {
+    width: 100px;
+    height: 100px;
+}
+
+.card-front,
+.card-back {
     background-size: 100px 100px;
     border-radius: 10px;
     cursor: pointer;
-    width: 100px;
-    height: 100px;
+    width: 100%;
+    height: 100%;
+    box-shadow: 5px 5px 10px 4px rgb(0, 0, 0, 0.4);
+}
+
+.card-front {
+    background-image: url(./imgs/Download\ Dinosaurs\ silhouettes\ layers\ background\ \ banner\ \ illustration_\ \ for\ free.jpeg);
+}
+
+.card-back {
+    background-image: url(https://source.unsplash.com/random/100x100);
 }
