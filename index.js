@@ -1,7 +1,11 @@
 let totalCards = 10;
 let cardsFliped = 0;
 
-const availebleCards = ['1', '2', '3', '4','5','1', '2', '3', '4','5'];
+const availebleCards = [];
+for (let j = 0; j < (totalCards / 2); j++) {
+    availebleCards.push(`${j + 1}`);
+    availebleCards.push(`${j + 1}`);
+}
 
 const cardGrid = document.querySelector('#card-grid');
 
