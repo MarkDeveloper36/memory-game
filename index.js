@@ -1,4 +1,5 @@
 let totalCards = 20;
+let cardsFliped = 0;
 
 const cardGrid = document.querySelector('#card-grid');
 
@@ -17,11 +18,35 @@ function gameLoop() {
 
 function addCards() {
     for (let i = 0; i < totalCards; i++) {
-        let cardContainer = document.createElement('div');
-        cardContainer.classList.add('card-container');
-        cardGrid.appendChild(cardContainer);
+        let card = document.createElement('div');
+        card.classList.add('card');
+        cardGrid.appendChild(card);
         let cardFront = document.createElement('div');
-        cardFront.classList.add('cart-front');
-        cardContainer.appendChild(cardFront);
+        cardFront.classList.add('card-front');
+        card.appendChild(cardFront);
+        let cardBack = document.createElement('div');
+        cardBack.classList.add('card-back');
+        cardBack.innerText = (i + 1);
+        card.appendChild(cardBack);
+
+        card.addEventListener('click', () => {
+            card.classList.add('card-flip');
+            cardsFliped ++;
+            flipBack(cardsFliped);
+        });
     }
 }
+
+function flipBack (num) {
+    if (num > 1) {
+        cardsFliped = 0;
+        const flipedCards = document.querySelectorAll('.card-flip');
+        setTimeout(() => {
+            flipedCards[0].classList.remove('card-flip');
+            flipedCards[1].classList.remove('card-flip');    
+        }, 1200);
+    }
+}
+
+// To do
+// 1. add feature to give each card a random rotate x or rotate y 
