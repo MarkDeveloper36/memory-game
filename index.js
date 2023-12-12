@@ -26,13 +26,9 @@ musicBtn.addEventListener('click', () => {
     }
 });
 
-
-
 const newGameBtn = document.querySelector('#newGameBtn');
 newGameBtn.addEventListener('click', () => {
-    while (cardGrid.firstChild) {
-        cardGrid.removeChild(cardGrid.lastChild);
-    }
+    resetRound();
     gameLoop(totalCards);
 })
 
@@ -93,7 +89,23 @@ function flipBack (num) {
                 cardsToFlip = 2;
                 flipedThisTurn = null;
                 cardsMatched = cardsMatched + 2;
+                checkToStartNextRound(cardsMatched);
             }, 400);
         }
+    }
+}
+
+function resetRound() {
+    while (cardGrid.firstChild) {
+        cardGrid.removeChild(cardGrid.lastChild);
+    }
+    cardsMatched = 0;
+}
+
+function checkToStartNextRound(num) {
+    if (num === totalCards) {
+        resetRound();
+        totalCards = totalCards + 2;
+        gameLoop(totalCards)
     }
 }
