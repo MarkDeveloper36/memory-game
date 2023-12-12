@@ -1,7 +1,7 @@
-let totalCards = 20;
+let totalCards = 10;
 let cardsFliped = 0;
 
-const availebleCards = ['1', '2', '3', '4','5', '6', '7', '8', '9', '10','1', '2', '3', '4','5', '6', '7', '8', '9', '10'];
+const availebleCards = ['1', '2', '3', '4','5','1', '2', '3', '4','5'];
 
 const cardGrid = document.querySelector('#card-grid');
 
@@ -47,10 +47,10 @@ function addCards() {
 }
 
 function giveCardBack(backOfCardArr) {
-    let randomCardBack;
-    randomCardBack = Math.ceil(Math.random() * backOfCardArr.length);
-    backOfCardArr.splice((randomCardBack - 1), 1);
-    return randomCardBack;
+    let randomIndex = Math.ceil(Math.random() * backOfCardArr.length);
+    let result = backOfCardArr[randomIndex - 1];
+    backOfCardArr.splice((randomIndex - 1), 1);
+    return result;
 }
 
 function flipBack (num) {
