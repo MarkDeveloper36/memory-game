@@ -1,11 +1,8 @@
-let totalCards = 10;
-let cardsFliped = 0;
+let totalCards = 20;
+let cardsToFlip = 2;
+let flipedThisTurn = null;
 
 const availebleCards = [];
-for (let j = 0; j < (totalCards / 2); j++) {
-    availebleCards.push(`${j + 1}`);
-    availebleCards.push(`${j + 1}`);
-}
 
 const cardGrid = document.querySelector('#card-grid');
 
@@ -16,16 +13,15 @@ cardGrid.style.gridTemplateColumns = `repeat(${cols}, 100px)`;
 cardGrid.style.gridTemplateRows = `repeat(${rows}, 100px)`;
 
 
-gameLoop()
+gameLoop(totalCards)
 
-function gameLoop() {
+function gameLoop(amoutOfCards) {
+    for (let j = 0; j < (amoutOfCards / 2); j++) {
+        availebleCards.push(`${j + 1}`);
+        availebleCards.push(`${j + 1}`);
+    }
     addCards();
 }
-
-
-
-
-
 
 function addCards() {
     for (let i = 0; i < totalCards; i++) {
@@ -37,20 +33,20 @@ function addCards() {
         card.appendChild(cardFront);
         let cardBack = document.createElement('div');
         cardBack.classList.add('card-back');
-        cardBack.innerText = giveCardBack(availebleCards);
+        cardBack.innerText = giveCardBackside(availebleCards);
         card.appendChild(cardBack);
 
         card.addEventListener('click', () => {
-            if (cardsFliped < 2) {
-                cardsFliped ++;
+            if (cardsToFlip > 0) {
+                cardsToFlip --;
                 card.classList.add('card-flip');
-                flipBack(cardsFliped);
+                flipBack(cardsToFlip);
             }
         });
     }
 }
 
-function giveCardBack(backOfCardArr) {
+function giveCardBackside(backOfCardArr) {
     let randomIndex = Math.ceil(Math.random() * backOfCardArr.length);
     let result = backOfCardArr[randomIndex - 1];
     backOfCardArr.splice((randomIndex - 1), 1);
@@ -58,13 +54,23 @@ function giveCardBack(backOfCardArr) {
 }
 
 function flipBack (num) {
-    if (num > 1) {
-        const flipedCards = document.querySelectorAll('.card-flip');
-        setTimeout(() => {
-            flipedCards[0].classList.remove('card-flip');
-            flipedCards[1].classList.remove('card-flip');
-            cardsFliped = 0;    
-        }, 1200);
+    if (num < 1) {
+        flipedThisTurn = document.querySelectorAll('.card-flip:not(.locked)');
+        if (flipedThisTurn[0].lastChild.textContent !== flipedThisTurn[1].lastChild.textContent) {
+            setTimeout(() => {
+                flipedThisTurn[0].classList.remove('card-flip');
+                flipedThisTurn[1].classList.remove('card-flip');
+                cardsToFlip = 2;
+                flipedThisTurn = null;
+            }, 1200);
+        } else {
+            setTimeout(() => {
+                flipedThisTurn[0].classList.add('locked');
+                flipedThisTurn[1].classList.add('locked');
+                cardsToFlip = 2;
+                flipedThisTurn = null;
+            }, 1200);
+        }
     }
 }
 
