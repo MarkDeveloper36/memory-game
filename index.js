@@ -1,6 +1,8 @@
 let totalCards = 20;
 let cardsFliped = 0;
 
+const availebleCards = ['1', '2', '3', '4','5', '6', '7', '8', '9', '10','1', '2', '3', '4','5', '6', '7', '8', '9', '10'];
+
 const cardGrid = document.querySelector('#card-grid');
 
 let cols = Math.ceil(Math.sqrt(totalCards));
@@ -16,6 +18,11 @@ function gameLoop() {
     addCards();
 }
 
+
+
+
+
+
 function addCards() {
     for (let i = 0; i < totalCards; i++) {
         let card = document.createElement('div');
@@ -26,7 +33,7 @@ function addCards() {
         card.appendChild(cardFront);
         let cardBack = document.createElement('div');
         cardBack.classList.add('card-back');
-        cardBack.innerText = (i + 1);
+        cardBack.innerText = giveCardBack(availebleCards);
         card.appendChild(cardBack);
 
         card.addEventListener('click', () => {
@@ -37,6 +44,13 @@ function addCards() {
             }
         });
     }
+}
+
+function giveCardBack(backOfCardArr) {
+    let randomCardBack;
+    randomCardBack = Math.ceil(Math.random() * backOfCardArr.length);
+    backOfCardArr.splice((randomCardBack - 1), 1);
+    return randomCardBack;
 }
 
 function flipBack (num) {
