@@ -30,20 +30,22 @@ function addCards() {
         card.appendChild(cardBack);
 
         card.addEventListener('click', () => {
-            card.classList.add('card-flip');
-            cardsFliped ++;
-            flipBack(cardsFliped);
+            if (cardsFliped < 2) {
+                cardsFliped ++;
+                card.classList.add('card-flip');
+                flipBack(cardsFliped);
+            }
         });
     }
 }
 
 function flipBack (num) {
     if (num > 1) {
-        cardsFliped = 0;
         const flipedCards = document.querySelectorAll('.card-flip');
         setTimeout(() => {
             flipedCards[0].classList.remove('card-flip');
-            flipedCards[1].classList.remove('card-flip');    
+            flipedCards[1].classList.remove('card-flip');
+            cardsFliped = 0;    
         }, 1200);
     }
 }
