@@ -1,18 +1,19 @@
 body {
     background-image: url(./imgs/22628444_6654537.jpg);
     background-size: 100vw 100vh;
+    padding: calc(20px + 0.5vw);
 
     display: flex;
     justify-content: center;
-    align-items: center;
     height: 100vh;
     overflow: hidden;
 }
 
 #card-grid {
+    align-self: center;
     background-color: rgb(0, 0, 0, 0.2);
     width: 80vw;
-    height: 80vh;
+    height: 75vh;
     border-radius: 2rem;
     padding: 50px;
 
@@ -62,4 +63,61 @@ body {
 
 .card-flip {
     transform: rotateY(180deg);
+}
+
+#controlsDiv {
+    width: calc(4vw + 0.5vw);
+    height: calc(8vw + 0.5vh);
+    margin-top: 7vh;
+    display: flex;
+    justify-content: flex-end;
+    padding: calc(10px + 0.75vw);
+    display: grid;
+    gap: calc(10px + 0.1vw);
+}
+
+#icon-container {
+    height: 48px;
+}
+
+#icon-container svg {
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
+  }
+
+#icon-container:hover {
+    transform: translateY(-1px);
+    filter: drop-shadow(3px 3px 4px rgba(0, 0, 0, 0.5));
+} 
+
+#icon-container:active {
+    transform: translateY(1px);
+    filter: drop-shadow(0px 0px 0px rgba(0, 0, 0, 0.2));
+}
+
+.btn {
+    display: inline-block;
+    font-weight: 400;
+    height: calc(40px + 0.5vw);
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    user-select: none;
+    border: 2px solid black;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    background-color: rgb(245, 85, 110);
+}
+
+.btn:hover {
+    color: #fff;
+    text-decoration: none;
+}
+  
+.btn:active {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    transform: translateY(1px);
 }

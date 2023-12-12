@@ -9,9 +9,24 @@
     <title>Memory</title>
 </head>
 <body>
+    <div id="controlsDiv" >
+        <div id="icon-container">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <rect id="play (2) 1" width="48" height="48" fill="url(#pattern0)"/>
+            <defs>
+            <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+            <use xlink:href="#image0_5_6" transform="scale(0.015625)"/>
+            </pattern>
+            <image id="image0_5_6" data-name="play (2).png" width="64" height="64" xlink:href="data:image/png;base64,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"/>
+            </defs>
+            </svg>
+        </div>
+        <button id="newGameBtn" class="btn">New Game</button>
+    </div>
     <div id="card-grid">
     </div>
 
+    <audio id="soundTrack" src="./Sounds/8-bit-dream-land-142093.mp3"></audio>
     <script src="./index.js"></script>
 </body>
 </html>

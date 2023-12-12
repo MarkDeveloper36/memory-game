@@ -1,17 +1,40 @@
-let totalCards = 20;
+let totalCards = 4;
 let cardsToFlip = 2;
-let flipedThisTurn = null;
+let flipedThisTurn;
+let cardsMatched = 0;
+let isSoundtrackPlaying = false;
 
 const availebleCards = [];
 
+//grid
 const cardGrid = document.querySelector('#card-grid');
-
 let cols = Math.ceil(Math.sqrt(totalCards));
 let rows = Math.ceil(totalCards / cols);
-
 cardGrid.style.gridTemplateColumns = `repeat(${cols}, 100px)`;
 cardGrid.style.gridTemplateRows = `repeat(${rows}, 100px)`;
+//sound
+const soundTrack = document.querySelector('#soundTrack');
+soundTrack.addEventListener('ended', () => soundTrack.play());
+const musicBtn = document.querySelector('#icon-container');
+musicBtn.addEventListener('click', () => {
+    if (!isSoundtrackPlaying) {
+        soundTrack.play();
+        isSoundtrackPlaying = true;
+    } else {
+        soundTrack.pause();
+        isSoundtrackPlaying = false;
+    }
+});
 
+
+
+const newGameBtn = document.querySelector('#newGameBtn');
+newGameBtn.addEventListener('click', () => {
+    while (cardGrid.firstChild) {
+        cardGrid.removeChild(cardGrid.lastChild);
+    }
+    gameLoop(totalCards);
+})
 
 gameLoop(totalCards)
 
@@ -37,8 +60,8 @@ function addCards() {
         card.appendChild(cardBack);
 
         card.addEventListener('click', () => {
-            if (cardsToFlip > 0) {
-                cardsToFlip --;
+            if (cardsToFlip > 0 && !card.classList.contains('card-flip')) {
+                cardsToFlip--;
                 card.classList.add('card-flip');
                 flipBack(cardsToFlip);
             }
@@ -62,17 +85,15 @@ function flipBack (num) {
                 flipedThisTurn[1].classList.remove('card-flip');
                 cardsToFlip = 2;
                 flipedThisTurn = null;
-            }, 1200);
+            }, 1000);
         } else {
             setTimeout(() => {
                 flipedThisTurn[0].classList.add('locked');
                 flipedThisTurn[1].classList.add('locked');
                 cardsToFlip = 2;
                 flipedThisTurn = null;
-            }, 1200);
+                cardsMatched = cardsMatched + 2;
+            }, 400);
         }
     }
 }
-
-// To do
-// 1. add feature to give each card a random rotate x or rotate y 
