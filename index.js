@@ -2,16 +2,16 @@ let totalCards = 4;
 let cardsToFlip = 2;
 let flipedThisTurn;
 let cardsMatched = 0;
+let round = 1;
+let cols;
+let rows;
 let isSoundtrackPlaying = false;
 
 const availebleCards = [];
 
 //grid
 const cardGrid = document.querySelector('#card-grid');
-let cols = Math.ceil(Math.sqrt(totalCards));
-let rows = Math.ceil(totalCards / cols);
-cardGrid.style.gridTemplateColumns = `repeat(${cols}, 100px)`;
-cardGrid.style.gridTemplateRows = `repeat(${rows}, 100px)`;
+
 //sound
 const soundTrack = document.querySelector('#soundTrack');
 soundTrack.addEventListener('ended', () => soundTrack.play());
@@ -29,12 +29,21 @@ musicBtn.addEventListener('click', () => {
 const newGameBtn = document.querySelector('#newGameBtn');
 newGameBtn.addEventListener('click', () => {
     resetRound();
+    totalCards = 4;
     gameLoop(totalCards);
 })
 
-gameLoop(totalCards)
+gameLoop(totalCards);
+
+function appendGrid(num) {
+    cols = Math.ceil(Math.sqrt(num));
+    rows = Math.ceil(num / cols);
+    cardGrid.style.gridTemplateColumns = `repeat(${cols}, 100px)`;
+    cardGrid.style.gridTemplateRows = `repeat(${rows}, 100px)`;
+}
 
 function gameLoop(amoutOfCards) {
+    appendGrid(totalCards);
     for (let j = 0; j < (amoutOfCards / 2); j++) {
         availebleCards.push(`${j + 1}`);
         availebleCards.push(`${j + 1}`);
@@ -100,12 +109,14 @@ function resetRound() {
         cardGrid.removeChild(cardGrid.lastChild);
     }
     cardsMatched = 0;
+    cardsToFlip = 2; 
 }
 
 function checkToStartNextRound(num) {
     if (num === totalCards) {
         resetRound();
         totalCards = totalCards + 2;
+        round++;
         gameLoop(totalCards)
     }
 }

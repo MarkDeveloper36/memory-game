@@ -114,6 +114,8 @@ body {
 .btn:hover {
     color: #fff;
     text-decoration: none;
+    transform: translateY(-1px);
+    box-shadow: 3px 3px 10px rgb(0, 0, 0, 0.8);
 }
   
 .btn:active {
