@@ -2,6 +2,7 @@ body {
     background-image: url(./imgs/22628444_6654537.jpg);
     background-size: 100vw 100vh;
     padding: calc(20px + 0.5vw);
+    padding: 0;
 
     display: flex;
     justify-content: center;
@@ -12,9 +13,10 @@ body {
 #card-grid {
     align-self: center;
     background-color: rgb(0, 0, 0, 0.2);
-    width: 80vw;
+    width: 70vw;
     height: 75vh;
     border-radius: 2rem;
+    margin: auto 15px;
     padding: 50px;
 
     display: grid;
@@ -65,8 +67,9 @@ body {
     transform: rotateY(180deg);
 }
 
-#controlsDiv {
-    width: calc(4vw + 0.5vw);
+#controlsDiv,
+#statsDiv {
+    width: calc(6vw + 0.5vw);
     height: calc(8vw + 0.5vh);
     margin-top: 7vh;
     display: flex;
@@ -74,6 +77,11 @@ body {
     padding: calc(10px + 0.75vw);
     display: grid;
     gap: calc(10px + 0.1vw);
+    padding: 10px;
+    
+    color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
 }
 
 #icon-container {

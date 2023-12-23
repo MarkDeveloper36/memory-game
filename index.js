@@ -3,14 +3,15 @@ let cardsToFlip = 2;
 let flipedThisTurn;
 let cardsMatched = 0;
 let round = 1;
-let cols;
-let rows;
+const roundCount = document.querySelector('#roundCount');
 let isSoundtrackPlaying = false;
 
 const availebleCards = [];
 
 //grid
 const cardGrid = document.querySelector('#card-grid');
+let cols;
+let rows;
 
 //sound
 const soundTrack = document.querySelector('#soundTrack');
@@ -30,6 +31,8 @@ const newGameBtn = document.querySelector('#newGameBtn');
 newGameBtn.addEventListener('click', () => {
     resetRound();
     totalCards = 4;
+    round = 1;
+    roundCount.innerText = `Round: ${round}`;
     gameLoop(totalCards);
 })
 
@@ -109,7 +112,7 @@ function resetRound() {
         cardGrid.removeChild(cardGrid.lastChild);
     }
     cardsMatched = 0;
-    cardsToFlip = 2; 
+    cardsToFlip = 2;
 }
 
 function checkToStartNextRound(num) {
@@ -117,6 +120,7 @@ function checkToStartNextRound(num) {
         resetRound();
         totalCards = totalCards + 2;
         round++;
+        roundCount.innerText = `Round: ${round}`;
         gameLoop(totalCards)
     }
 }
