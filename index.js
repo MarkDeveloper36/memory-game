@@ -76,7 +76,7 @@ function addCards() {
         });
     }
 }
-
+//https://source.unsplash.com/random/100x100
 function giveCardBackside(backOfCardArr) {
     let randomIndex = Math.ceil(Math.random() * backOfCardArr.length);
     let result = backOfCardArr[randomIndex - 1];
