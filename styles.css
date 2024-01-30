@@ -55,7 +55,6 @@ body {
 }
 
 .card-back {
-    background-color: blueviolet;
     transform: rotateY(180deg);
     color: white;
     font-size: 3rem;

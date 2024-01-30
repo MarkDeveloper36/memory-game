@@ -7,18 +7,33 @@ const roundCount = document.querySelector('#roundCount');
 let isSoundtrackPlaying = false;
 
 const availebleCardsNum = [];
-const randomBackImgObj = [
-    {
-        cardPair: '1',
-        distinction: 'A',
-        backGroundLink: ''
-    },
-    {
-        cardPair: '1',
-        distinction: 'B',
-        backGroundLink: ''
-    }
-];
+const imgArr = [];
+// const randomBackImgObj = [
+//     {
+//         cardPair: '1',
+//         distinction: 'A',
+//         backside: ''
+
+//     },
+//     {
+//         cardPair: '1',
+//         distinction: 'B',
+//         backside: ''
+
+//     },
+//     {
+//         cardPair: '2',
+//         distinction: 'A',
+//         backside: ''
+
+//     },
+//     {
+//         cardPair: '2',
+//         distinction: 'B',
+//         backside: ''
+
+//     }
+// ];
 
 //grid
 const cardGrid = document.querySelector('#card-grid');
@@ -67,11 +82,6 @@ function gameLoop(amoutOfCards) {
     addCards();
 }
 
-function getRandomeImgs(totalCards) {
-    let numOfimgs = totalCards / 2;
-    
-}
-
 function addCards() {
     for (let i = 0; i < totalCards; i++) {
         let card = document.createElement('div');
@@ -83,6 +93,7 @@ function addCards() {
         let cardBack = document.createElement('div');
         cardBack.classList.add('card-back');
         cardBack.innerText = giveCardBackside(availebleCardsNum);
+        cardBack.style.backgroundImage = giveCardBacksideImg(cardBack);
         card.appendChild(cardBack);
 
         card.addEventListener('click', () => {
@@ -101,6 +112,22 @@ function giveCardBackside(backOfCardArr) {
     let result = backOfCardArr[randomIndex - 1];
     backOfCardArr.splice((randomIndex - 1), 1);
     return result;
+}
+
+function getRandomeImgs(totalCards) {
+    let numOfLoops = totalCards / 2;
+    let imgLink = 'https://source.unsplash.com/random/100x100';
+    for(let i = 0; i < numOfLoops; i++) {
+        let image = new Image();
+        image.src = imgLink;
+        imgArr.push(image);
+    }
+}
+
+function giveCardBacksideImg(cardBack) {
+    console.log(imgArr[0]);
+    return imgArr[0];
+    // return 'url(https://source.unsplash.com/random/100x100)';
 }
 
 function flipBack (num) {
