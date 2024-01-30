@@ -6,7 +6,19 @@ let round = 1;
 const roundCount = document.querySelector('#roundCount');
 let isSoundtrackPlaying = false;
 
-const availebleCards = [];
+const availebleCardsNum = [];
+const randomBackImgObj = [
+    {
+        cardPair: '1',
+        distinction: 'A',
+        backGroundLink: ''
+    },
+    {
+        cardPair: '1',
+        distinction: 'B',
+        backGroundLink: ''
+    }
+];
 
 //grid
 const cardGrid = document.querySelector('#card-grid');
@@ -48,10 +60,16 @@ function appendGrid(num) {
 function gameLoop(amoutOfCards) {
     appendGrid(totalCards);
     for (let j = 0; j < (amoutOfCards / 2); j++) {
-        availebleCards.push(`${j + 1}`);
-        availebleCards.push(`${j + 1}`);
+        availebleCardsNum.push(`${j + 1}`);
+        availebleCardsNum.push(`${j + 1}`);
     }
+    getRandomeImgs(amoutOfCards);
     addCards();
+}
+
+function getRandomeImgs(totalCards) {
+    let numOfimgs = totalCards / 2;
+    
 }
 
 function addCards() {
@@ -64,7 +82,7 @@ function addCards() {
         card.appendChild(cardFront);
         let cardBack = document.createElement('div');
         cardBack.classList.add('card-back');
-        cardBack.innerText = giveCardBackside(availebleCards);
+        cardBack.innerText = giveCardBackside(availebleCardsNum);
         card.appendChild(cardBack);
 
         card.addEventListener('click', () => {
@@ -76,6 +94,7 @@ function addCards() {
         });
     }
 }
+
 //https://source.unsplash.com/random/100x100
 function giveCardBackside(backOfCardArr) {
     let randomIndex = Math.ceil(Math.random() * backOfCardArr.length);
