@@ -7,33 +7,9 @@ const roundCount = document.querySelector('#roundCount');
 let isSoundtrackPlaying = false;
 
 const availebleCardsNum = [];
-const imgArr = [];
-// const randomBackImgObj = [
-//     {
-//         cardPair: '1',
-//         distinction: 'A',
-//         backside: ''
 
-//     },
-//     {
-//         cardPair: '1',
-//         distinction: 'B',
-//         backside: ''
-
-//     },
-//     {
-//         cardPair: '2',
-//         distinction: 'A',
-//         backside: ''
-
-//     },
-//     {
-//         cardPair: '2',
-//         distinction: 'B',
-//         backside: ''
-
-//     }
-// ];
+const accessKey = '8yshMIXzRfy5yAhEIhNYWqDobX9vjOMt2GB5OoE7J4k';
+const apiUrl = 'https://api.unsplash.com/photos/random?count=1&width=100&height=100&client_id=' + accessKey;
 
 //grid
 const cardGrid = document.querySelector('#card-grid');
@@ -78,8 +54,8 @@ function gameLoop(amoutOfCards) {
         availebleCardsNum.push(`${j + 1}`);
         availebleCardsNum.push(`${j + 1}`);
     }
-    getRandomeImgs(amoutOfCards);
     addCards();
+    giveCardBackSideImg();
 }
 
 function addCards() {
@@ -92,8 +68,7 @@ function addCards() {
         card.appendChild(cardFront);
         let cardBack = document.createElement('div');
         cardBack.classList.add('card-back');
-        cardBack.innerText = giveCardBackside(availebleCardsNum);
-        cardBack.style.backgroundImage = giveCardBacksideImg(cardBack);
+        cardBack.innerText = giveCardBacksideNum(availebleCardsNum);
         card.appendChild(cardBack);
 
         card.addEventListener('click', () => {
@@ -106,29 +81,39 @@ function addCards() {
     }
 }
 
-//https://source.unsplash.com/random/100x100
-function giveCardBackside(backOfCardArr) {
+//https://api.unsplash.com/
+function giveCardBacksideNum(backOfCardArr) {
     let randomIndex = Math.ceil(Math.random() * backOfCardArr.length);
     let result = backOfCardArr[randomIndex - 1];
     backOfCardArr.splice((randomIndex - 1), 1);
     return result;
 }
 
-function getRandomeImgs(totalCards) {
-    let numOfLoops = totalCards / 2;
-    let imgLink = 'https://source.unsplash.com/random/100x100';
-    for(let i = 0; i < numOfLoops; i++) {
-        let image = new Image();
-        image.src = imgLink;
-        imgArr.push(image);
-    }
+function giveCardBackSideImg() {
+    let numberOfCards = cardGrid.children.length;
+    let cardBack = document.querySelector('.card-back');
+    let img = getRandomImage();
+    console.log(img);
+    cardBack.style.backgroundImage = `url(${img})`;
+
 }
 
-function giveCardBacksideImg(cardBack) {
-    console.log(imgArr[0]);
-    return imgArr[0];
-    // return 'url(https://source.unsplash.com/random/100x100)';
-}
+async function getRandomImage() {
+    try {
+      const response = await fetch(apiUrl);
+      const data = await response.json();
+  
+      if (data && data.length > 0) {
+        const imageUrl = data[0].urls.small;
+        console.log(imageUrl);
+        return imageUrl;
+      } else {
+        console.error('Geen afbeeldingen ontvangen van de Unsplash API.');
+      }
+    } catch (error) {
+      console.error('Fout bij het ophalen van de afbeelding:', error);
+    }
+  }
 
 function flipBack (num) {
     if (num < 1) {
