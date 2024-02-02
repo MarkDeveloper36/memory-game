@@ -55,7 +55,6 @@ function gameLoop(amoutOfCards) {
         availebleCardsNum.push(`${j + 1}`);
     }
     addCards();
-    giveCardBackSideImg();
 }
 
 function addCards() {
@@ -69,6 +68,9 @@ function addCards() {
         let cardBack = document.createElement('div');
         cardBack.classList.add('card-back');
         cardBack.innerText = giveCardBacksideNum(availebleCardsNum);
+        let img = giveCardBackSideImg();
+        console.log(img);
+        // cardBack.style.backgroundImage = `url('${giveCardBackSideImg()}')`;
         card.appendChild(cardBack);
 
         card.addEventListener('click', () => {
@@ -89,16 +91,7 @@ function giveCardBacksideNum(backOfCardArr) {
     return result;
 }
 
-function giveCardBackSideImg() {
-    let numberOfCards = cardGrid.children.length;
-    let cardBack = document.querySelector('.card-back');
-    let img = getRandomImage();
-    console.log(img);
-    cardBack.style.backgroundImage = `url(${img})`;
-
-}
-
-async function getRandomImage() {
+async function giveCardBackSideImg() {
     try {
       const response = await fetch(apiUrl);
       const data = await response.json();
