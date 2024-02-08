@@ -57,7 +57,9 @@ function gameLoop(amoutOfCards) {
     addCards();
 }
 
-function addCards() {
+async function addCards() {
+    const imgUrls = await Promise.all(Array.from({length: totalCards }, () => giveCardBackSideImg()));
+
     for (let i = 0; i < totalCards; i++) {
         let card = document.createElement('div');
         card.classList.add('card');
